@@ -9,6 +9,8 @@ from typing import Final
 OIL_PRICE: Final = 1.25
 OIL_LITRES_PER_CASE: Final = 12
 GAS_PRICE: Final = 1.05
+DISCOUNT_THRESHOLD_OIL: Final = 6
+DISCOUNT_THRESHOLD_GAS: Final = 2000
 AB_OR_BC_GST: Final = 0.05
 ON_GST: Final = 0.13
 OTHERS_GST: Final = 0.15
@@ -22,7 +24,7 @@ print("-" * border_length)
 
 print("Please select the type of purchase:")
 print("G: Gas\nO: Oil")
-user_choice = input("")
+user_choice = input(">>>")
 
 if user_choice.upper() != "G" and user_choice.upper() != "O":
     print("Invalid input, you should enter g/G or o/O")
@@ -37,7 +39,7 @@ elif user_choice.upper() == "O":
         quantity = num_of_cases * OIL_LITRES_PER_CASE
         price_before_discount = quantity * OIL_PRICE
         
-        if num_of_cases > 6:
+        if num_of_cases > DISCOUNT_THRESHOLD_OIL:
             price_after_discount = quantity * (OIL_PRICE * 0.9)
         else:
             price_after_discount = price_before_discount
@@ -73,7 +75,7 @@ elif user_choice.upper() == "G":
         quantity = num_of_litres
         price_before_discount = quantity * GAS_PRICE
         
-        if num_of_litres > 2000:
+        if num_of_litres > DISCOUNT_THRESHOLD_GAS:
             price_after_discount = quantity * (GAS_PRICE * 0.9)
         else:
             price_after_discount = price_before_discount
